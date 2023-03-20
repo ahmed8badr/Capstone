@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaskapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flaskapp
+  template:
+    metadata:
+      labels:
+        app: flaskapp
+    spec:
+      containers:
+      - name: web
+        image: 455710768693.dkr.ecr.us-west-2.amazonaws.com/jenkins/flaskapp:latest
+        ports:
+        - containerPort: 5002
+        envFrom:
+        - configMapRef:
+            name: flaskapp-config
+        - secretRef:
+            name: flaskapp-secret
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5002
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5002
+          initialDelaySeconds: 15
+          periodSeconds: 15
