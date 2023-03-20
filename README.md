@@ -6,6 +6,3 @@
 **Docker & Docker-compose** <br />
 **Kubectl** <br />
 **Helm**  <br />
-
-## Needed changes:
-
