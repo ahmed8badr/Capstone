@@ -1,11 +1,11 @@
 # Sprints Capstone Project!
 ## Requirements
-**Ansible**
-**Terraform**
-**AWS CLI**
-**Docker & Docker-compose**
-**Kubectl**
-**Helm** 
+**Ansible** <br />
+**Terraform** <br />
+**AWS CLI** <br />
+**Docker & Docker-compose** <br />
+**Kubectl** <br />
+**Helm**  <br />
 
 ## Needed changes:
 
