@@ -15,3 +15,6 @@ Jenkins pipeline to build, push images to ECR, and deploy to Kubernetes on each 
 **Docker & Docker-compose** <br />
 **Kubectl** <br />
 **Helm**  <br />
+
+## Instructions
+change any variable between <> with your value
