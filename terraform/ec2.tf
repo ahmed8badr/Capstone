@@ -1,7 +1,7 @@
 resource "aws_instance" "jenkins" {
   ami           = "ami-0edab8d70528476d3"
   instance_type = "t2.micro"
-  key_name      = "capstone"
+  key_name      = "<key name>"
   vpc_security_group_ids = [aws_security_group.Jenkins_SG.id]
 }
 

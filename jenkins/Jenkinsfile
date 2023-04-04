@@ -2,15 +2,15 @@ pipeline {
     agent any
 
     environment {
-        ECR_REPOSITORY = '455710768693.dkr.ecr.us-west-2.amazonaws.com/jenkins'
-        KUBECONFIG_PATH = 'path/to/your/kubeconfig'
-        SERVICE_NAME = 'your-service-name'
+        ECR_REPOSITORY = '<ecr link>'
+        KUBECONFIG_PATH = '<path/to/your/kubeconfig>'
+        SERVICE_NAME = '<service-name>'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-user/your-repo.git'
+                git '<repo link>'
             }
         }
 
@@ -22,7 +22,7 @@ pipeline {
 
         stage('Push Docker image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'your-aws-credentials-id', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+                withCredentials([usernamePassword(credentialsId: '<aws credentials id>', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     sh 'docker login -u $AWS_ACCESS_KEY_ID -p $AWS_SECRET_ACCESS_KEY ${ECR_REPOSITORY}'
                     sh 'docker push ${ECR_REPOSITORY}:latest'
                 }
@@ -31,7 +31,7 @@ pipeline {
 
         stage('Deploy to EKS') {
             steps {
-                withCredentials([file(credentialsId: 'your-kubeconfig-credentials-id', variable: 'KUBECONFIG')]) {
+                withCredentials([file(credentialsId: '<kubeconfig credentials id>', variable: 'KUBECONFIG')]) {
                     sh 'kubectl --kubeconfig=${KUBECONFIG} apply -f k8s/manifests/'
                 }
             }
@@ -41,7 +41,7 @@ pipeline {
             steps {
                 script {
                     def loadBalancerHostname = sh(script: "kubectl --kubeconfig=${KUBECONFIG} get svc ${SERVICE_NAME} -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'", returnStdout: true).trim()
-                    echo "The website is available at http://${loadBalancerHostname}"
+                    echo "URL: http://${loadBalancerHostname}"
                 }
             }
         }

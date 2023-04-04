@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: 455710768693.dkr.ecr.us-west-2.amazonaws.com/jenkins/flaskapp:latest
+        image: <ecr link>/<image name>
         ports:
         - containerPort: 5002
         envFrom:
